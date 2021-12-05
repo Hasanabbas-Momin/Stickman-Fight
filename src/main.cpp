@@ -32,6 +32,9 @@ void main_game_loop(){
               gameRunning = false;
       }
       cout << m->get_mouse_x() << " " <<  m->get_mouse_y() << endl;
+      if(m->isClicked()){
+        cout << "Mouse click" << endl;
+      }
 
       window->clear();
       SDL_PumpEvents();

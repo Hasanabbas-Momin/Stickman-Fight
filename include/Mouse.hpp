@@ -5,6 +5,8 @@
 #include<iostream>
 #include<inttypes.h>
 
+using namespace std;
+
 
 class Mouse{
 private:
@@ -13,15 +15,9 @@ private:
 	
 
 public: 
-	int get_mouse_x(){
-       SDL_GetMouseState(&x_pos,&y_pos);
-       return this->x_pos;
-	}
-
-	int get_mouse_y(){
-		SDL_GetMouseState(&x_pos,&y_pos);
-
-		return this->y_pos;
-	}
+	int get_mouse_x();
+	int get_mouse_y();
+	bool isClicked(); // only Left click can be detected
+	
 
 };
