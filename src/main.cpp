@@ -1,4 +1,6 @@
 #include"../include/Window.hpp"
+#include"../include/Button.hpp"
+#include"../include/Mouse.hpp"
 
  // Initilizes the sdl Library
 void Initilize(){
@@ -15,19 +17,31 @@ void Initilize(){
 
 void main_game_loop(){
   // Main game loop 
-  Window window("Stickman-Fight", 1280, 720);
+  Window *window = new Window("Stickman-Fight", 1280, 720);
   bool gameRunning = true;
   SDL_Event event;
+
+  SDL_Texture *Back_ground = (window->loadTexture("../images/Background.jpg"));
+  Button *b = new Button(600,300,100,100,"../images/play.png");
+  Mouse *m = new Mouse();
   while (gameRunning)
-  {
+  {   
       while (SDL_PollEvent(&event))
       {
           if (event.type == SDL_QUIT)
               gameRunning = false;
       }
+      cout << m->get_mouse_x() << " " <<  m->get_mouse_y() << endl;
+
+      window->clear();
+      SDL_PumpEvents();
+      window->Render_texture(Back_ground);
+      b->draw_button(window);
+      window->display();
+
   }
 
-  window.cleanUp();
+  window->cleanUp();
   SDL_Quit();
 
 }
