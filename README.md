@@ -1,4 +1,8 @@
-# Stickman-Fight
-# To Run 
-# make 
-# ./bin/Stickman-Fight
+# Stick-manFight
+to Run 
+cd Stick-manFight
+make 
+./bin/Stick-manFight
+
+
+
