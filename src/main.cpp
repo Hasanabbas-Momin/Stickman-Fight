@@ -1,6 +1,7 @@
 #include"../include/Window.hpp"
 #include"../include/Button.hpp"
 #include"../include/Mouse.hpp"
+#include"../include/leaderboard.hpp"
 
  // Initilizes the sdl Library
 void Initilize(){
@@ -54,7 +55,16 @@ void main_game_loop(){
       cout << m->get_mouse_x() << " " <<  m->get_mouse_y() << endl;
       
 
-     
+      if(Leader_board_screen){
+       window->clear();
+       leaderboard* score=new leaderboard(window);
+       int temp=score->display_score();
+       if(temp){
+        Leader_board_screen=false;
+        Home_screen=true;
+       }
+       score->destroy();
+      }
       if(Home_screen){
 
        window->clear();
@@ -65,7 +75,8 @@ void main_game_loop(){
 
        if(b->isClicked(m)){
         Home_screen = false; 
-        Play_screen = true;
+        //Play_screen = true;
+        Leader_board_screen=true;
        }
 
        window->display();
