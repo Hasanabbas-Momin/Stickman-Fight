@@ -157,8 +157,8 @@ void leaderboard::display_score() {
     SDL_Texture* tex;
     SDL_Rect rectangle;
     char* espace_statement = (char*)"PRESS ESC TO GO TO MAIN MENU";
-    SDL_Texture* tex_for_escape;
-    SDL_Rect rect_for_escape;
+    
+    
     get_text_and_rect(renderer, 0, 0, espace_statement, font, &tex_for_escape, &rect_for_escape);
     get_text_and_rect(renderer, 340, 200, player_names[0], font, &texture[0], &rect[0]);
     get_text_and_rect(renderer, 800, 200, scores[0], font, &tex_score[0], &rect_score[0]);
