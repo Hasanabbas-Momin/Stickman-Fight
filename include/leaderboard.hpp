@@ -18,10 +18,12 @@ public:
     void update_score(string, int);
     void get_text_and_rect(SDL_Renderer*, int, int, char*, TTF_Font*, SDL_Texture**, SDL_Rect*);
     void destroy();
-    int display_score();
+    void display_score();
+    void output();
     leaderboard(Window* win) {
         window = win->get_window();
         renderer = win->get_renderer();
+        display_score();
     }
    
 
@@ -39,6 +41,8 @@ private:
     SDL_Texture* texture[10];
     SDL_Texture* tex_score[10];
     SDL_Texture* tex_top[3];
+    SDL_Texture* tex_for_escape;
+    SDL_Rect rect_for_escape;
     SDL_Texture* tex_name_background[10];
     SDL_Texture* back_tex;
 };
