@@ -1,10 +1,40 @@
 #include"../include/leaderboard.hpp"
 
+void leaderboard::output(){
+    fstream f;
+    f.open("../data/Data.txt");
+    int n;
+    f>>n;
+    f.close();
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+
+    /* Use TTF textures. */
+    SDL_RenderCopy(renderer, back_tex, NULL, NULL);
+
+    for (int i = 0; i < n; i++) {
+        SDL_RenderCopy(renderer, tex_name_background[i], NULL, &rect_name_back[i]);
+        SDL_RenderCopy(renderer, texture[i], NULL, &rect[i]);
+        SDL_RenderCopy(renderer, tex_score[i], NULL, &rect_score[i]);
+        SDL_RenderCopy(renderer, tex_face[i], NULL, &rect_face[i]);
+        if (i < 3) {
+            SDL_RenderCopy(renderer, tex_top[i], NULL, &rect_top[i]);
+        }
+    }
+   
+    
+
+    SDL_RenderCopy(renderer, tex_for_escape, NULL, &rect_for_escape);
+    SDL_RenderPresent(renderer);
+}
+
+
+
 void leaderboard::update_score(string player_name, int player_score) {
     fstream file;
     file.open("../data/Data.txt");
     file >> number_of_players;
-    vector<pair<int, string>> game(number_of_players + 1);
+    vector<pair<int, string> > game(number_of_players + 1);
     for (int i = 0; i < number_of_players; i++) {
         int score;
         string name;
@@ -56,9 +86,9 @@ void leaderboard::get_text_and_rect(SDL_Renderer* renderer, int x, int y, char* 
 }
 
 
-int leaderboard::display_score() {
+void leaderboard::display_score() {
 
-    SDL_Event event;
+    
     SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO);
  
     if (IMG_Init(IMG_INIT_PNG) == 0) {
@@ -105,7 +135,7 @@ int leaderboard::display_score() {
     int number_of_players;
     file.open("../data/Data.txt");
     file >> number_of_players;
-    vector<pair<string, string>> players(number_of_players);
+    vector<pair<string, string> > players(number_of_players);
     for (int i = 0; i < number_of_players; i++) {
         file >> players[i].first >> players[i].second;
         player_names[i] = const_cast<char*>(players[i].first.c_str());
@@ -114,7 +144,7 @@ int leaderboard::display_score() {
     file.close();
 
 
-    int quit;
+    
 
    
     TTF_Init();
@@ -140,44 +170,6 @@ int leaderboard::display_score() {
 
 
     
-
-
-    quit = 0;
-    while (!quit) {
-        while (SDL_PollEvent(&event) == 1) {
-            if (event.type == SDL_QUIT) {
-                quit = 1;
-            }
-            if (event.type == SDL_KEYDOWN) {
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    quit = 1;
-                    return 1;
-                }
-
-            }
-        }
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-        SDL_RenderClear(renderer);
-
-        /* Use TTF textures. */
-        SDL_RenderCopy(renderer, back_tex, NULL, NULL);
-  
-        for (int i = 0; i < number_of_players; i++) {
-            SDL_RenderCopy(renderer, tex_name_background[i], NULL, &rect_name_back[i]);
-            SDL_RenderCopy(renderer, texture[i], NULL, &rect[i]);
-            SDL_RenderCopy(renderer, tex_score[i], NULL, &rect_score[i]);
-            SDL_RenderCopy(renderer, tex_face[i], NULL, &rect_face[i]);
-            if (i < 3) {
-                SDL_RenderCopy(renderer, tex_top[i], NULL, &rect_top[i]);
-            }
-        }
-        SDL_RenderCopy(renderer, tex_for_escape, NULL, &rect_for_escape);
-        SDL_RenderPresent(renderer);
-    }
-    
-    TTF_Quit();
-    SDL_Quit();
-    return 0;
   
 }
 void leaderboard::destroy() {
