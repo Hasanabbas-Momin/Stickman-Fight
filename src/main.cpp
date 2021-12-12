@@ -9,7 +9,7 @@ void Initilize(){
   {
       cout << "SDL_init has failed ERROR:" << SDL_GetError() << endl;
   }
-  if (!(IMG_Init(IMG_INIT_JPG)))
+  if (!(IMG_Init(IMG_INIT_JPG || IMG_INIT_PNG)))
   {
       cout << "IMG-init has failed ERROR:" << SDL_GetError() << endl;
   }
@@ -51,19 +51,21 @@ void main_game_loop(){
       {
           if (event.type == SDL_QUIT)
               gameRunning = false;
+          if (Leader_board_screen == true) {
+                if (event.type == SDL_KEYDOWN) {
+                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                        Leader_board_screen = false;
+                        Home_screen = true;
+                    }
+                }
+            }
       }
       cout << m->get_mouse_x() << " " <<  m->get_mouse_y() << endl;
       
 
       if(Leader_board_screen){
-       window->clear();
-       leaderboard* score=new leaderboard(window);
-       int temp=score->display_score();
-       if(temp){
-        Leader_board_screen=false;
-        Home_screen=true;
-       }
-       score->destroy();
+       leaderboard score(window);
+       score.output();
       }
       if(Home_screen){
 
