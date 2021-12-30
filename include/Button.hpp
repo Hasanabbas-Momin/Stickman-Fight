@@ -3,8 +3,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include<iostream>
-#include"Window.hpp"
-#include"Mouse.hpp"
+#include"../include/Window.hpp"
+#include"../include/Mouse.hpp"
 
 
 class Button{

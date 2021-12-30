@@ -21,6 +21,7 @@ public:
     void clear();
     void Render_texture(SDL_Texture *tex);
     void Render_texture(SDL_Texture *tex,int x,int y,int width,int height);
+    void Render_texture(SDL_Texture *tex, SDL_Rect* src, SDL_Rect* dst);
     void display();
 
     // getter

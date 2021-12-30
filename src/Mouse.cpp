@@ -16,9 +16,8 @@ bool Mouse :: isClicked(){
 	Uint32 cursors =  SDL_GetMouseState(&x_pos, &y_pos);
 
 	if((cursors & SDL_BUTTON_LMASK) != 0){
-         return true;
+        return true;
 	}
-	
 
 	return false;
 }

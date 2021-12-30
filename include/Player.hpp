@@ -1,13 +1,31 @@
+#pragma once
+
 #include<iostream> 
 #include<vector> 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include"Rect_point.hpp"
+#include"Window.hpp"
+
 using namespace std;
 
+// Both enemy and the hero
 class Player{
-private:
-	vector<string> animations; 
-	vector<vector<SDL_Texture *>> image_animations; 
-public:
-	Player()
 
+   protected: 
+	int health; // health of the player
+	SDL_Texture *sprite_sheet; 
+    float animation_time; 
+    Rect_point *src; // curr_pos on sprite sheet
+    Rect_point *dest; // curr_pos on destination
+    Rect_point *sprite_points;
+    int num_sprites;
 
-}
+    
+
+   public: 
+   	 virtual void setter(int health,SDL_Texture *sprite_sheet,float animation_time)=0; 
+   	 virtual void animate(float secondsElapsed)=0;
+   	 virtual void draw_player(float secondsElapsed)=0;
+
+};

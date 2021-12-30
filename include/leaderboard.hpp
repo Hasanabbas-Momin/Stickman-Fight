@@ -7,7 +7,7 @@
 #include<fstream>
 #include<vector>
 #include<string.h>
-#include"Window.hpp"
+#include"../include/Window.hpp"
 #undef main
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720

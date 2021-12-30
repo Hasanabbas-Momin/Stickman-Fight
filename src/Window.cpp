@@ -22,7 +22,7 @@ SDL_Texture* Window :: loadTexture(const char *file_path){
     if(tex == NULL){
        cout << "Error : " << SDL_GetError() << endl;
     }
-
+    
     return tex;
 
 }
@@ -51,8 +51,11 @@ void Window :: Render_texture(SDL_Texture *tex,int x,int y,int width,int height)
 }
 
 // displays the texture (updates the display)
+void Window :: Render_texture(SDL_Texture *tex,SDL_Rect *src,SDL_Rect *end){
+    SDL_RenderCopy(this->renderer,tex,src,end); 
+}   
 void Window :: display(){
     SDL_RenderPresent(this->renderer);
 }
 
-
+        
