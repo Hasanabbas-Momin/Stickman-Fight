@@ -47,9 +47,9 @@ void main_game_loop(){
     int frametime;
     float secondselapsed=0;
     // Loding the images
-    SDL_Texture *Back_ground = (window->loadTexture("../images/back.jpg"));
-    Button *b = new Button(1100,620,100,100,"../images/lead.png");
-    Button *c = new Button(600,280,100,100,"../images/play.png");
+    SDL_Texture *Back_ground = (window->loadTexture("images/back.jpg"));
+    Button *b = new Button(1100,620,100,100,"images/lead.png");
+    Button *c = new Button(600,280,100,100,"images/play.png");
 
 
     Mouse *m = new Mouse();

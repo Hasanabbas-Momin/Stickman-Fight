@@ -88,7 +88,7 @@ void Enemy :: setter(int health,SDL_Texture *sprite_sheet,float animation_time){
 }
 void Enemy:: gettexture()
 {
-	SDL_Surface* surface = IMG_Load("../images/Enemy.png");
+	SDL_Surface* surface = IMG_Load("images/Enemy.png");
 	SDL_Texture* t;
 	t=SDL_CreateTextureFromSurface(gRenderer,surface);
 	SDL_FreeSurface(surface);

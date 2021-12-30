@@ -25,9 +25,9 @@ void LTexture :: display(int i,int angle){
 	else{
 		right=false;
 	}
-	SDL_Surface* backsurface = IMG_Load("../images/Background.jpg");
+	SDL_Surface* backsurface = IMG_Load("images/Background.jpg");
 	background = SDL_CreateTextureFromSurface( gRenderer,backsurface);
-	SDL_Surface* image1 =IMG_Load("../images/hulk.png");
+	SDL_Surface* image1 =IMG_Load("images/hulk.png");
 	t =SDL_CreateTextureFromSurface(gRenderer,image1);
 	SDL_FreeSurface(backsurface);
 	SDL_FreeSurface(image1);
