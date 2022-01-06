@@ -1,28 +1,24 @@
 #pragma once
  
-#include "../include/Player.hpp"
-
-#include "../include/Window.hpp"
+#include "Player.hpp"
 
 
 class Enemy : public Player{
 private:
 	float count;
-	SDL_Renderer *gRenderer;
-	int direction;
+	int speed;
+	int direction;//0->0
+				  //1->180
 
 public:
-	Enemy(Window* );
+	Enemy(int speed);
 	void setter(int health,SDL_Texture *sprite_sheet,float animation_time);
 	void animate(float secondsElapsed);
-	void draw_player(float secondsElapsed);
+	void draw_player(Window *w,float secondsElapsed);
 	void update_position(float secondsElapsed);
-	void gettexture();
-	float getcount();
-	void changecount(int ch, int d );
-	int getposx();
+	SDL_Rect getrect();
 	int getdirection();
-
+	void setdirection(int);
 
 
 };

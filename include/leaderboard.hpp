@@ -7,7 +7,7 @@
 #include<fstream>
 #include<vector>
 #include<string.h>
-#include"../include/Window.hpp"
+#include"Window.hpp"
 #undef main
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -41,8 +41,8 @@ private:
     SDL_Texture* texture[10];
     SDL_Texture* tex_score[10];
     SDL_Texture* tex_top[3];
-    SDL_Texture* tex_for_escape;
-    SDL_Rect rect_for_escape;
     SDL_Texture* tex_name_background[10];
     SDL_Texture* back_tex;
+    SDL_Texture* tex_for_escape;
+    SDL_Rect rect_for_escape;
 };

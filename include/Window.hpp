@@ -23,6 +23,7 @@ public:
     void Render_texture(SDL_Texture *tex,int x,int y,int width,int height);
     void Render_texture(SDL_Texture *tex, SDL_Rect* src, SDL_Rect* dst);
     void display();
+    void rend(SDL_Texture *,SDL_Rect *,SDL_Rect *);
 
     // getter
     SDL_Window * get_window(){

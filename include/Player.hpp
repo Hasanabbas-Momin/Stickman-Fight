@@ -2,8 +2,6 @@
 
 #include<iostream> 
 #include<vector> 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include"Rect_point.hpp"
 #include"Window.hpp"
 
@@ -26,6 +24,6 @@ class Player{
    public: 
    	 virtual void setter(int health,SDL_Texture *sprite_sheet,float animation_time)=0; 
    	 virtual void animate(float secondsElapsed)=0;
-   	 virtual void draw_player(float secondsElapsed)=0;
+   	 virtual void draw_player(Window *w,float secondsElapsed)=0;
 
 };

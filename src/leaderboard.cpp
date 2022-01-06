@@ -2,7 +2,7 @@
 
 void leaderboard::output(){
     fstream f;
-    f.open("../data/Data.txt");
+    f.open("data/Data.txt");
     int n;
     f>>n;
     f.close();
@@ -32,16 +32,16 @@ void leaderboard::output(){
 
 void leaderboard::update_score(string player_name, int player_score) {
     fstream file;
-    file.open("../data/Data.txt");
+    file.open("data/Data.txt");
     file >> number_of_players;
-    vector<pair<int, string> > game(number_of_players + 1);
+    vector<pair<int, string>> game(number_of_players + 1);
     for (int i = 0; i < number_of_players; i++) {
         int score;
         string name;
         file >> game[i].second >> game[i].first;
     }
     file.close();
-    file.open("../data/Data.txt", ios::trunc | ios::out | ios::in);
+    file.open("data/Data.txt", ios::trunc | ios::out | ios::in);
     game[number_of_players].second = player_name;
     game[number_of_players].first = player_score;
     if (number_of_players < 10) {
@@ -88,21 +88,21 @@ void leaderboard::get_text_and_rect(SDL_Renderer* renderer, int x, int y, char* 
 
 void leaderboard::display_score() {
 
-    
+    SDL_Event event;
     SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO);
  
     if (IMG_Init(IMG_INIT_PNG) == 0) {
         cout << "error sdl2_img";
     }
-    SDL_Surface* back_surface = IMG_Load("../images/main.png");
-    SDL_Surface* face_surface = IMG_Load("../images/face.png");
-    SDL_Surface* name_surface = IMG_Load("../images/name.png");
+    SDL_Surface* back_surface = IMG_Load("images/main.png");
+    SDL_Surface* face_surface = IMG_Load("images/face.png");
+    SDL_Surface* name_surface = IMG_Load("images/name.png");
 
 
     SDL_Surface* top[3];
-    top[0] = IMG_Load("../images/first.png");
-    top[1] = IMG_Load("../images/second.png");
-    top[2] = IMG_Load("../images/third.png");
+    top[0] = IMG_Load("images/first.png");
+    top[1] = IMG_Load("images/second.png");
+    top[2] = IMG_Load("images/third.png");
 
     back_tex = SDL_CreateTextureFromSurface(renderer, back_surface);
     for (int i = 0; i < 10; i++) {
@@ -133,9 +133,9 @@ void leaderboard::display_score() {
    
     fstream file;
     int number_of_players;
-    file.open("../data/Data.txt");
+    file.open("data/Data.txt");
     file >> number_of_players;
-    vector<pair<string, string> > players(number_of_players);
+    vector<pair<string, string>> players(number_of_players);
     for (int i = 0; i < number_of_players; i++) {
         file >> players[i].first >> players[i].second;
         player_names[i] = const_cast<char*>(players[i].first.c_str());
@@ -144,11 +144,11 @@ void leaderboard::display_score() {
     file.close();
 
 
-    
+    int quit;
 
    
     TTF_Init();
-    TTF_Font* font = TTF_OpenFont("../font/cha.ttf", 24);
+    TTF_Font* font = TTF_OpenFont("font/cha.ttf", 24);
     if (font == NULL) {
         fprintf(stderr, "error: font not found\n");
         exit(EXIT_FAILURE);
@@ -157,8 +157,8 @@ void leaderboard::display_score() {
     SDL_Texture* tex;
     SDL_Rect rectangle;
     char* espace_statement = (char*)"PRESS ESC TO GO TO MAIN MENU";
-    
-    
+    SDL_Texture* tex_for_escape;
+    SDL_Rect rect_for_escape;
     get_text_and_rect(renderer, 0, 0, espace_statement, font, &tex_for_escape, &rect_for_escape);
     get_text_and_rect(renderer, 340, 200, player_names[0], font, &texture[0], &rect[0]);
     get_text_and_rect(renderer, 800, 200, scores[0], font, &tex_score[0], &rect_score[0]);

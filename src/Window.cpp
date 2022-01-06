@@ -53,7 +53,10 @@ void Window :: Render_texture(SDL_Texture *tex,int x,int y,int width,int height)
 // displays the texture (updates the display)
 void Window :: Render_texture(SDL_Texture *tex,SDL_Rect *src,SDL_Rect *end){
     SDL_RenderCopy(this->renderer,tex,src,end); 
-}   
+}  
+void Window :: rend(SDL_Texture *tex,SDL_Rect *src ,SDL_Rect *end){
+    SDL_RenderCopyEx(this->renderer,tex,src,end,180,NULL,SDL_FLIP_VERTICAL);
+} 
 void Window :: display(){
     SDL_RenderPresent(this->renderer);
 }

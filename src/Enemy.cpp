@@ -1,14 +1,20 @@
 #include"../include/Enemy.hpp"
-//#include"../include/Window.hpp"
 
-Enemy :: Enemy(Window *win){
-	gRenderer=win->get_renderer();
+Enemy :: Enemy(int speed){
 	count = 0;
 	num_sprites = 8;
-	
+	//int direction =1;
+	//cout<<"direction" <<direction<<endl;
+	int a=(rand()%2);
+    cout<<"direction ==" <<a <<endl;
+	setdirection(a);
 	dest = new Rect_point();
-	dest->x_pos = 300;
+	if(direction==0)
+		dest->x_pos = (-1*(rand()%1000))-(rand()%500);
+	else if(direction==1)
+		dest->x_pos = (rand()%500)+1750;
 	dest->y_pos = 520;
+	cout<<"Starting postion of enemy " <<dest->x_pos<<endl;
 	
 
 	// hardcoding all the values of sprite sheet
@@ -65,7 +71,7 @@ Enemy :: Enemy(Window *win){
 
 
 
-  	sprite_points[8].x_pos = 517;
+    sprite_points[8].x_pos = 517;
 	sprite_points[8].y_pos = 225;
 	sprite_points[8].width = 155;
 	sprite_points[8].height = 207;
@@ -77,24 +83,20 @@ Enemy :: Enemy(Window *win){
 	sprite_points[9].width = 139;
 	sprite_points[9].height = 201;
 
+	this->speed = speed;
+
 
 	// 
 }
-
+void Enemy :: setdirection(int a){
+	this->direction = a;
+}
 void Enemy :: setter(int health,SDL_Texture *sprite_sheet,float animation_time){
   this->health = health;
   this->sprite_sheet = sprite_sheet;
   this->animation_time = animation_time;
 }
-void Enemy:: gettexture()
-{
-	SDL_Surface* surface = IMG_Load("images/Enemy.png");
-	SDL_Texture* t;
-	t=SDL_CreateTextureFromSurface(gRenderer,surface);
-	SDL_FreeSurface(surface);
-	this->setter(100,t,0.1);
-	//return t;
-}
+
 void Enemy :: animate(float secondsElapsed){
 
     if(count < 1*animation_time){
@@ -144,18 +146,11 @@ void Enemy :: animate(float secondsElapsed){
 
      
     count += secondsElapsed;
-	cout<<"count "<<count/animation_time<<endl;
+	
 
 }
-void Enemy :: changecount(int ch, int d=0){
-	count =ch;
-	dest->x_pos=ch*100;
-	direction =d;
-}
-int Enemy :: getposx(){
-	return dest->x_pos;
-}
-void Enemy :: draw_player(float secondsElapsed){
+
+void Enemy :: draw_player(Window *w,float secondsElapsed ){
   this->animate(secondsElapsed);
   SDL_Rect start; 
   start.x = src->x_pos;
@@ -168,36 +163,39 @@ void Enemy :: draw_player(float secondsElapsed){
   dest_.y = dest->y_pos;
   dest_.w = 100;
   dest_.h = 150;
+  //cout<<"direction at draw_player "<<direction<<endl;
   if(direction==0){
-	SDL_RenderCopyEx(gRenderer,this->sprite_sheet,&start,&dest_,0,NULL,SDL_FLIP_NONE);
-  	SDL_RenderPresent(gRenderer);
+	  w->Render_texture(this->sprite_sheet,&start,&dest_);
   }
-  else{
-	SDL_RenderCopyEx(gRenderer,this->sprite_sheet,&start,&dest_,180,NULL,SDL_FLIP_VERTICAL);
-  	SDL_RenderPresent(gRenderer);
+  else if(direction ==1){
+	  w->rend(this->sprite_sheet,&start,&dest_);
   }
-  
-  //w->Render_texture(this->sprite_sheet,&start,&dest_);
-}
 
-void Enemy :: update_position(float secondsElapsed){
-	if(direction==0){
-		dest->x_pos += 300*secondsElapsed;
-    	if(dest->x_pos > 640){
-    		dest->x_pos = 0;
-    	}
-	}
-	else{
-		dest->x_pos -= 300*secondsElapsed;
-    	if(dest->x_pos <640){
-    		dest->x_pos = 1280;
-    	}
-	}
-    
+  
 }
-float Enemy::getcount(){
-	return count;
-}
-int Enemy:: getdirection(){
+int Enemy :: getdirection(){
 	return direction;
+}
+SDL_Rect Enemy::getrect(){
+	SDL_Rect t;
+	t.x=dest->x_pos;
+	t.y=dest->y_pos;
+	t.w=100;
+	t.h=150;
+	return t;
+}
+void Enemy :: update_position(float secondsElapsed){
+    //cout<<"directino at update_position " <<direction<<endl;
+	if(direction==0){
+		if(dest->x_pos > 650){
+    		dest->x_pos = -200;
+    	}
+		dest->x_pos += this->speed*secondsElapsed;
+	}
+    else if(direction==1){
+		if(dest->x_pos < 500){
+    		dest->x_pos = 1500;
+    	}
+		dest->x_pos -= this->speed*secondsElapsed;
+	}
 }
