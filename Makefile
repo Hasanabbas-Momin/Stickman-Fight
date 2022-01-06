@@ -6,7 +6,7 @@ File3 = src/Mouse.cpp
 File4 = src/Enemy.cpp
 File5 = src/Game.cpp
 File6 = src/leaderboard.cpp
-File7 = src/hero1.cpp
+File7 = src/hero.cpp
 File8 = src/music.cpp
 
 Stickman-Fight:
