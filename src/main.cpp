@@ -52,7 +52,7 @@ void main_game_loop(){
 
     float count=0;
     int degrees=0;
-    int sizeofenemy=(rand()%4)+1;
+    int sizeofenemy=(rand()%6)+1;
     g->spawn_random_enemys(sizeofenemy);
     cout<<"size of enemy" << sizeofenemy<<endl;
     bool stop=true;

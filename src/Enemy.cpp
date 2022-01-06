@@ -10,9 +10,9 @@ Enemy :: Enemy(int speed){
 	setdirection(a);
 	dest = new Rect_point();
 	if(direction==0)
-		dest->x_pos = (-1*(rand()%1000))-(rand()%500);
+		dest->x_pos = (-1*(rand()%1000))-500;
 	else if(direction==1)
-		dest->x_pos = (rand()%500)+1750;
+		dest->x_pos = (rand()%800)+1750;
 	dest->y_pos = 520;
 	cout<<"Starting postion of enemy " <<dest->x_pos<<endl;
 	
